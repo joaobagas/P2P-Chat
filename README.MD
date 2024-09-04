@@ -10,8 +10,7 @@ The Server creates a UDP broadcast and then the Client who is listening for poss
 
 ## Tasks
 
-- [ ] Implement Server UDP broadcast.
-- [ ] Implement Client UDP listening.
+- [x] Implement UDP broadcast and listen.
 - [ ] Implement TCP handshake.
 - [ ] Implement sending messages.
 - [ ] (Bonus) Encrypt Messages.
