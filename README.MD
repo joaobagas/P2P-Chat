@@ -1,16 +1,19 @@
-# Peer to Peer Chat
+# README
 
-## Description
+## About
 
-This is a simple P2P Chat that gives you the option of being the Client or the Server and then uses a combination of UDP and TCP to comunicate messages through the console.
+This is the official Wails Vanilla template.
 
-## How does it work
+You can configure the project by editing `wails.json`. More information about the project settings can be found
+here: https://wails.io/docs/reference/project-config
 
-The Server creates a UDP broadcast and then the Client who is listening for possible broadcasts will get the information and establish a TCP handshake and then both will start comunicating.
+## Live Development
 
-## Tasks
+To run in live development mode, run `wails dev` in the project directory. This will run a Vite development
+server that will provide very fast hot reload of your frontend changes. If you want to develop in a browser
+and have access to your Go methods, there is also a dev server that runs on http://localhost:34115. Connect
+to this in your browser, and you can call your Go code from devtools.
 
-- [x] Implement UDP broadcast and listen.
-- [ ] Implement TCP handshake.
-- [ ] Implement sending messages.
-- [ ] (Bonus) Encrypt Messages.
+## Building
+
+To build a redistributable, production mode package, use `wails build`.

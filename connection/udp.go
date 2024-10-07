@@ -5,16 +5,21 @@ import (
 	"net"
 )
 
+const (
+	port = ":8829"
+	ip = "255.255.255.255"
+)
+
 func BroadcastUdp() {
 	fmt.Println("Broadcasting info via UDP...")
 
-	connection, err := net.ListenPacket("udp4", ":8829")
+	connection, err := net.ListenPacket("udp4", port)
 	if err != nil {
 		panic(err)
 	}
 	defer connection.Close()
 
-	address, err := net.ResolveUDPAddr("udp4", "255.255.255.255:8829")
+	address, err := net.ResolveUDPAddr("udp4", ip + port)
 	if err != nil {
 		panic(err)
 	}
@@ -29,7 +34,7 @@ func BroadcastUdp() {
 func ListenUdp() {
 	fmt.Println("Listening for broadcasts...")
 
-	connection, err := net.ListenPacket("udp4", ":8829")
+	connection, err := net.ListenPacket("udp4", port)
 	if err != nil {
 		panic(err)
 	}
