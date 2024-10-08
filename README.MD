@@ -1,11 +1,14 @@
-# README
+# P2P Chat
 
-## About
+## Description
+This is a simple P2P Chat that gives you the option of being the Client or the Server and then uses a combination of UDP and TCP to comunicate messages through the console.
 
-This is the official Wails Vanilla template.
-
-You can configure the project by editing `wails.json`. More information about the project settings can be found
-here: https://wails.io/docs/reference/project-config
+## Tasks
+- [ ] Implement broadcasting.
+- [ ] Implement listening.
+- [ ] Implement front-end.
+- [ ] Implement sending messages.
+- [ ] (Bonus) Encrypt Messages.
 
 ## Live Development
 

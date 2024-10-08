@@ -1,26 +1,128 @@
-html {
-    background-color: rgba(27, 38, 54, 1);
-    text-align: center;
-    color: white;
+/* Reset default styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
 }
 
 body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f2f5;
+    padding: 10px;
     margin: 0;
+}
+
+/* Container that takes full window width and height */
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 900px;  /* Max width of the app */
+    height: 100vh; /* Full viewport height */
+    gap: 10px; /* Space between elements */
+}
+
+/* Connection controls (username, IP, port, buttons) */
+.connection-controls {
+    display: flex;
+    gap: 10px;
+}
+
+.connection-controls input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.connection-controls button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #4caf50;
     color: white;
-    font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
-    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 14px;
 }
 
-@font-face {
-    font-family: "Nunito";
-    font-style: normal;
-    font-weight: 400;
-    src: local(""),
-    url("assets/fonts/nunito-v16-latin-regular.woff2") format("woff2");
+.connection-controls button:hover {
+    background-color: #45a049;
 }
 
-#app {
-    height: 100vh;
-    text-align: center;
+/* Chat box - takes most of the vertical space and can't be resized */
+#chatBox {
+    flex-grow: 1; /* Makes it take up most of the available height */
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    font-size: 16px;
+    overflow-y: auto; /* Allow scrolling if the content exceeds the height */
+    resize: none; /* Disable resizing of the textarea */
+}
+
+/* Message input section */
+.message-input {
+    display: flex;
+    gap: 10px;
+}
+
+.message-input input {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.message-input button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #008cba;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 16px;
+}
+
+.message-input button:hover {
+    background-color: #007bb5;
+}
+
+/* Responsive layout for smaller screens */
+@media (max-width: 600px) {
+    .container {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .connection-controls {
+        flex-wrap: wrap;
+    }
+
+    .connection-controls input,
+    .connection-controls button {
+        flex: 1 1 100%;
+    }
+
+    .message-input {
+        flex-direction: column;
+    }
+
+    .message-input button {
+        width: 100%;
+    }
 }

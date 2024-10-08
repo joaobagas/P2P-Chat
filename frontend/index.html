@@ -1,12 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>P2P-Chat</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P2P Chat Application</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div id="app"></div>
-<script src="./src/main.js" type="module"></script>
+    <div class="container">
+        <!-- Information Box -->
+        <textarea id="chatBox" readonly placeholder="Chat messages will appear here..."></textarea>
+
+        <!-- Message Input -->
+        <div class="message-input">
+            <input type="text" id="message" placeholder="Type your message here...">
+            <button id="sendBtn">Send</button>
+        </div>
+
+        <!-- Connection Controls -->
+        <div class="connection-controls">
+            <input type="text" id="username" placeholder="Username">
+            <input type="text" id="ip" placeholder="IP Address">
+            <input type="number" id="port" placeholder="Port">
+            <button id="hostBtn">Host</button>
+            <button id="searchBtn">Search</button>
+        </div>
+    </div>
+
+    <!-- Optional: Include your JavaScript file -->
+    <script src="app.js"></script>
 </body>
 </html>
