@@ -4,10 +4,12 @@
 This is a simple P2P Chat that gives you the option of being the Client or the Server and then uses a combination of UDP and TCP to comunicate messages through the console.
 
 ## Tasks
-- [ ] Implement broadcasting.
-- [ ] Implement listening.
-- [ ] Implement front-end.
-- [ ] Implement sending messages.
+- [x] Implement frontend.
+- [x] Implement broadcasting (UDP).
+- [ ] Implement listening (UDP).
+- [ ] Implement sending messages (TCP).
+- [ ] Test using command line.
+- [ ] Connect frontend with backend.
 - [ ] (Bonus) Encrypt Messages.
 
 ## Live Development
