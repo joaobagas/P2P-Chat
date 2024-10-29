@@ -6,25 +6,17 @@ import (
 )
 
 func main() {
-	var choice int
-	var username string
+	const udpPort = "3000"
+	const tcpPort = "4000"
 
-	fmt.Println("Do you want to be the server (1) or the client (2)?")
-	fmt.Scan(&choice)
+	go conn.BroadcastUdp(udpPort)
 
-	fmt.Println("What is going to be your username?")
-	fmt.Scan(&username)
+	// Start listening for UDP discovery messages
+	go conn.ListenUdp(udpPort, func(peerIP string) {
+		fmt.Println("Discovered peer:", peerIP)
+		go conn.ConnectToPeer(peerIP, tcpPort)
+	})
 
-	switch choice {
-	case 1:
-		conn.BroadcastUdp()
-		return
-	case 2:
-		conn.ListenUdp()
-		return
-	default:
-		fmt.Println("Unsupported option!")
-		return
-	}
-
+	// Start listening for incoming TCP connections
+	conn.StartTCPListener(tcpPort)
 }

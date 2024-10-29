@@ -11,7 +11,6 @@ The Server creates a UDP broadcast and then the Client who is listening for poss
 ## Tasks
 
 - [x] Implement UDP connection.
-- [ ] Implement TCP connection.
-- [ ] Implement sending messages.
+- [X] Implement TCP connection.
 - [ ] (Bonus) Encrypt Messages.
 - [ ] (Bonus) Create a GUI.

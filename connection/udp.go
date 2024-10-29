@@ -3,48 +3,70 @@ package connection
 import (
 	"fmt"
 	"net"
+	"time"
 )
 
-const (
-	port = ":8829"
-	ip = "255.255.255.255"
-)
-
-func BroadcastUdp() {
+func BroadcastUdp(port string) {
 	fmt.Println("Broadcasting info via UDP...")
 
-	connection, err := net.ListenPacket("udp4", port)
+	addr, err := net.ResolveUDPAddr("udp", "255.255.255.255:"+port)
 	if err != nil {
-		panic(err)
-	}
-	defer connection.Close()
-
-	address, err := net.ResolveUDPAddr("udp4", ip + port)
-	if err != nil {
-		panic(err)
+		fmt.Println("There was an error with the resolving the UDP address! ", err)
+		return
 	}
 
-	// Here I should send the data.
-	_, err = connection.WriteTo([]byte("data to transmit"), address)
+	conn, err := net.DialUDP("udp", nil, addr)
 	if err != nil {
-		panic(err)
+		fmt.Println("There was an error dialing UDP! ", err)
+		return
+	}
+
+	defer conn.Close()
+
+	for {
+		message := []byte("DISCOVERY: New peer here!")
+		_, err := conn.Write(message)
+		if err != nil {
+			fmt.Println("Error sending the broadcast! ", err)
+			return
+		}
+		fmt.Println("Broadcast sent!")
+
+		// Broadcast every ten seconds
+		time.Sleep(10 * time.Second)
 	}
 }
 
-func ListenUdp() {
+func ListenUdp(port string, handlePeer func(string)) {
 	fmt.Println("Listening for broadcasts...")
 
-	connection, err := net.ListenPacket("udp4", port)
+	addr, err := net.ResolveUDPAddr("udp", ":"+port)
 	if err != nil {
-		panic(err)
-	}
-	defer connection.Close()
-
-	buffer := make([]byte, 1024)
-	n, address, err := connection.ReadFrom(buffer)
-	if err != nil {
-		panic(err)
+		fmt.Println("Error resolving address!", err)
+		return
 	}
 
-	fmt.Printf("%s sent this: %s\n", address, buffer[:n])
+	conn, err := net.ListenUDP("udp", addr)
+	if err != nil {
+		fmt.Println("Error setting up the listener!", err)
+		return
+	}
+
+	defer conn.Close()
+
+	for {
+		// Create an empty byte array
+		buffer := make([]byte, 1024)
+		n, srcAddr, err := conn.ReadFromUDP(buffer)
+		if err != nil {
+			fmt.Println("Error reading UDP!", err)
+			continue
+		}
+		message := string(buffer[:n])
+		fmt.Printf("Received message: %s from %s\n", message, srcAddr.String())
+
+		if message == "DISCOVERY: New peer here!" {
+			handlePeer(srcAddr.IP.String())
+		}
+	}
 }
